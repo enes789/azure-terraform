@@ -45,3 +45,6 @@ terraform.rc
 
 # ssh keys
 **.pub
+
+# spesific files
+db/sql/variables.tf
