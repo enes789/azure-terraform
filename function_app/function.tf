@@ -40,42 +40,42 @@ resource "azurerm_windows_function_app" "function_app" {
   }
 }
 
-resource "azurerm_function_app_function" "app_function" {
-  name            = "ProcessOrderStorage"
-  function_app_id = azurerm_windows_function_app.function_app.id
-  #language        = "CSharp"
+# resource "azurerm_function_app_function" "app_function" {
+#   name            = "ProcessOrderStorage"
+#   function_app_id = azurerm_windows_function_app.function_app.id
+#   #language        = "CSharp"
 
-#   file {
-#     name    = "run.csx"
-#     content = file("exampledata/run.csx")
-#   }
+# #   file {
+# #     name    = "run.csx"
+# #     content = file("exampledata/run.csx")
+# #   }
 
-#   test_data = jsonencode({
-#     "name" = "Azure"
+# #   test_data = jsonencode({
+# #     "name" = "Azure"
+# #   })
+
+#   config_json = jsonencode({
+#     "generatedBy" = "Microsoft.NET.Sdk.Functions.Generator-4.1.0",
+#     "configurationSource" = "attributes",
+#     "bindings" = [
+#         {
+#         "type" = "httpTrigger",
+#         "methods" = [
+#             "post"
+#         ],
+#         "authLevel" = "anonymous",
+#         "name" = "req"
+#         },
+#         {
+#         "type" = "blob",
+#         "connection" = "StorageConnectionString",
+#         "blobPath" = "orders",
+#         "access" = 2,
+#         "name" = "container"
+#         }
+#     ],
+#     "disabled" = false,
+#     "scriptFile" = "../bin/order.dll",
+#     "entryPoint" = "AzureCourse.Function.EventGridFunction.Run"
 #   })
-
-  config_json = jsonencode({
-    "generatedBy" = "Microsoft.NET.Sdk.Functions.Generator-4.1.0",
-    "configurationSource" = "attributes",
-    "bindings" = [
-        {
-        "type" = "httpTrigger",
-        "methods" = [
-            "post"
-        ],
-        "authLevel" = "anonymous",
-        "name" = "req"
-        },
-        {
-        "type" = "blob",
-        "connection" = "StorageConnectionString",
-        "blobPath" = "orders",
-        "access" = 2,
-        "name" = "container"
-        }
-    ],
-    "disabled" = false,
-    "scriptFile" = "../bin/order.dll",
-    "entryPoint" = "AzureCourse.Function.EventGridFunction.Run"
-  })
-}
+# }

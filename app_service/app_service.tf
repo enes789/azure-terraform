@@ -3,15 +3,14 @@ resource "random_integer" "tf_random" {
   max = 99999
 }
 
-resource "azurerm_resource_group" "tf_resource_group" {
-  name     = "tf-rg"
-  location = "West Europe"
+data "azurerm_resource_group" "resource_group" {
+  name = "readit-app-rg"
 }
 
 resource "azurerm_service_plan" "tf_app_service_plan" {
   name                = "tf-appserviceplan-${random_integer.tf_random.result}"
-  location            = azurerm_resource_group.tf_resource_group.location
-  resource_group_name = azurerm_resource_group.tf_resource_group.name
+  location            = data.azurerm_resource_group.resource_group.location
+  resource_group_name = data.azurerm_resource_group.resource_group.name
 
   os_type  = "Windows"
   sku_name = "F1"
@@ -19,8 +18,8 @@ resource "azurerm_service_plan" "tf_app_service_plan" {
 
 resource "azurerm_windows_web_app" "tf_web_app" {
   name                = "tf-app-service-${random_integer.tf_random.result}"
-  location            = azurerm_resource_group.tf_resource_group.location
-  resource_group_name = azurerm_resource_group.tf_resource_group.name
+  location            = data.azurerm_resource_group.resource_group.location
+  resource_group_name = data.azurerm_resource_group.resource_group.name
   service_plan_id     = azurerm_service_plan.tf_app_service_plan.id
 
 
